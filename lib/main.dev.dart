@@ -4,15 +4,16 @@ import 'hogeFactory.dart';
 import 'pages/loading.dart';
 
 Future main() async {
-  await DotEnv().load('.env');
-  Hoge.regist(Piyo.create());
+  await DotEnv().load('.env.dev');
+  Hoge.regist(Fuga.create());
   runApp(MyApp());
 }
 
-class Piyo implements Hoge{
-  Piyo.create();
-  String getTitle() => "piyo";
+class Fuga implements Hoge {
+  Fuga.create();
+  String getTitle() => "fuge";
 }
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
