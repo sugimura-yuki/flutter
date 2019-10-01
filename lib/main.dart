@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'hogeFactory.dart';
+import 'package:flutter_project/service/api/apiImple.dart';
 import 'pages/loading.dart';
+import 'package:flutter_project/service/ServiceContainer.dart';
+import 'package:flutter_project/service/api/apiInterface.dart';
 
 Future main() async {
   await DotEnv().load('.env');
-  Hoge.regist(Piyo.create());
+  ServiceContainer.bind<ApiInterface>(() => ApiImple());
   runApp(MyApp());
 }
 
-class Piyo implements Hoge{
-  Piyo.create();
-  String getTitle() => "piyo";
-}
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override

@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project/pages/home.dart';
+import 'package:flutter_project/service/ServiceContainer.dart';
+import 'package:flutter_project/service/api/apiInterface.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../hogeFactory.dart';
 
 class LoadingPage extends StatefulWidget {
   LoadingPage({Key key}) : super(key: key);
@@ -18,6 +18,8 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
+  final ApiInterface _api = ServiceContainer.make();
+
   @override
   void initState() {
     super.initState();
@@ -45,7 +47,7 @@ class _LoadingPageState extends State<LoadingPage> {
       future: _onLoading,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.hasData) {
-          return MyHomePage(title: Hoge().getTitle());
+          return MyHomePage(title: _api.getJson());
         } else {
           return Scaffold(
             appBar: AppBar(title: Text(DotEnv().env["MODE"])),

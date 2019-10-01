@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'hogeFactory.dart';
+import 'package:flutter_project/service/ServiceContainer.dart';
+import 'package:flutter_project/service/api/apiInterface.dart';
 import 'pages/loading.dart';
+import 'service/api/apiMock.dart';
 
 Future main() async {
   await DotEnv().load('.env.dev');
-  Hoge.regist(Fuga.create());
+  ServiceContainer.bind<ApiInterface>(() => ApiMock());
   runApp(MyApp());
-}
-
-class Fuga implements Hoge {
-  Fuga.create();
-  String getTitle() => "fuge";
 }
 
 class MyApp extends StatelessWidget {
